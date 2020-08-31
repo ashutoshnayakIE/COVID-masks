@@ -1,0 +1,223 @@
+country,state,population,density
+Australia,South Australia,1717000,1.62
+Australia,Tasmania,519100,7.24
+Australia,Northern Territory,245000,0.16
+Australia,Australian Capital Territory,1717000,1.62
+Australia,Western Australia,2567800,1.00
+Australia,Queensland,4883700,2.50
+Australia,Victoria,6244200,24.00
+Canada,Quebec,7903001,5.80
+Canada,Ontario,12851821,14.10
+Canada,Saskatchewan,1033381,1.80
+Canada,Nova Scotia,921727,17.40
+Canada,New Brunswick,751171,10.50
+Canada,Prince Edward Island,140204,24.70
+Canada,Alberta,3645257,5.70
+Canada,Northwest Territories,41462,0.10
+Canada,Manitoba,1208268,2.20
+Canada,Yukon,33897,0.10
+Canada,Nunavut,31906,0.10
+Canada,Newfoundland and Labrador,514536,1.40
+Canada,British Columbia,4400057,4.80
+France,Grand Est,5549586,97.00
+France,Corsica,330455,38.00
+France,Hauts-de-France,6009976,190.00
+France,Occitanie,5839867,80.00
+France,Brittany,4550418,134.00
+France,Normandy,3322757,110.00
+France,Paris,12213364,1000.00
+Germany,Berlin,3644826,4055.00
+Germany,Mecklenburg-Vorpommern,1609675,69.00
+Germany,Brandenburg,2511917,84.00
+Germany,Bavaria,13076721,184.00
+Germany,Saxony-Anhalt,2208321,109.00
+Germany,Hamburg,1841179,2424.00
+Germany,Schleswig-Holstein,2896712,183.00
+Germany,North Rhine-Westphalia,17932651,25.00
+Germany,Hesse,6265809,296.00
+Germany,Thuringia,2143145,133.00
+Germany,Bremen,682986,1624.00
+Germany,Lower Saxony,7982448,167.00
+Germany,Rheinland-Pfalz,4084844,205.00
+Germany,Saxony,4077937,221.00
+Germany,Baden-Wuerttemberg,11069533,308.00
+Germany,Saarland,990509,387.00
+India,Tamil Nadu,81500000,550.00
+India,Delhi,18980000,11320.00
+India,Kerala,34800000,859.00
+Indonesia,Bali,4362000,750.00
+Indonesia,West Java,49316712,0.00
+Indonesia,West Nusa Tenggara,4500212,0.00
+Indonesia,Bangka-Belitung Islands,1372813,0.00
+Indonesia,Jakarta,10770487,0.00
+Indonesia,North Sumatra,13923262,0.00
+Indonesia,East Java,39744800,0.00
+Indonesia,Aceh,4031589,0.00
+Indonesia,Yogyakarta,388627,0.00
+Indonesia,Central Java,34552500,0.00
+Indonesia,South Kalimantan,4119794,0.00
+Indonesia,Gorontalo,1133237,0.00
+Indonesia,West Kalimantan,4395983,0.00
+Indonesia,Central Sulawesi,2635009,0.00
+Indonesia,West Papua,760422,0.00
+Indonesia,Southeast Sulawesi,19573800,0.00
+Indonesia,East Nusa Tenggara,5112760,0.00
+Indonesia,South Sumatra,8497196,0.00
+Indonesia,Riau Islands,1961000,0.00
+Indonesia,Banten,11830000,0.00
+Indonesia,Papua,4363869,0.00
+Indonesia,Lampung,7608405,0.00
+Indonesia,Central Kalimantan,2649803,0.00
+Indonesia,West Sumatra,5479491,0.00
+Indonesia,Maluku,1533506,0.00
+Indonesia,South Sulawesi,8819500,0.00
+Italy,Sardinia,1651793,69.00
+Italy,Liguria,1557533,290.00
+Italy,Umbria,889001,110.00
+Italy,Piedmont,4377941,170.00
+Italy,Campania,5869029,430.00
+Italy,Tuscany,3742437,160.00
+Italy,Abruzzo,1307919,120.00
+Italy,Lombardy,10088484,420.00
+Italy,The Marches,1541692,160.00
+Italy,Sicily,4969147,190.00
+Italy,Veneto,4865380,270.00
+Italy,Basilicate,575902,58.00
+Italy,Apulia,4063888,210.00
+Italy,Emilia-Romagna,4446220,200.00
+Italy,Calabria,1980533,130.00
+Italy,Rome / Lazio (too big to leave out and not covered by region),5864321,340.00
+Japan,Fukushima,1848257,130.00
+Japan,Tokyo,13929280,6349.00
+Japan,Miyagi,2305596,320.00
+Japan,Okayama,1906464,270.00
+Japan,Fukuoka,5109323,1000.00
+Japan,Okinawa,1457162,640.00
+Japan,Hiroshima,2811410,330.00
+Japan,Yamaguchi,1377631,225.00
+Japan,Wakayama,944320,200.00
+Japan,Tottori,570569,163.00
+Japan,Aomori,1249314,130.00
+Japan,Ishikawa,1140573,272.00
+Japan,Iwate,1229432,80.00
+Japan,Shimane,689963,103.00
+Japan,Kanagawa,9058094,3770.00
+Japan,Osaka,8823358,4600.00
+Japan,Fukui,778943,186.00
+Japan,Akita,966000,83.00
+Japan,Hokkaido,5281297,63.00
+Japan,Yamagata,1079950,120.00
+Japan,Nagano,2052493,150.00
+Japan,Aichi,7552873,1500.00
+Japan,Yamanashi,817192,183.00
+Japan,Gifu,1991390,190.00
+Japan,Nara,1348930,365.00
+Japan,Niigata,2227496,180.00
+Japan,Ibaraki,2871199,470.00
+Japan,Kagoshima,1599779,170.00
+Mexico,Guanajuato,4919000,160.80
+Mexico,Tabasco,1994700,80.90
+Mexico,Baja California Sur,763929,6.50
+Mexico,Aguascalientes,1023800,183.20
+Mexico,Mexico City,8918653,5817.70
+Mexico,Oaxaca,3651100,38.30
+Mexico,Sonora,2262700,12.20
+Mexico,Tamaulipas,2927300,36.70
+Mexico,Yucatan,1714100,43.60
+Mexico,Nuevo Leon,5119504,62.60
+Mexico,Jalisco,8256100,81.60
+Mexico,Mexico,16187608,668.60
+Mexico,Durango,1449100,12.10
+Mexico,Puebla,5480200,161.60
+Mexico,Sinaloa,2574300,44.30
+Mexico,Hidalgo,2330900,111.10
+Mexico,Baja California,2846500,40.60
+Mexico,Quintana Roo,1023500,20.30
+Mexico,Guerrero,3196100,50.10
+Mexico,Coahuila,2395100,15.80
+Mexico,Campeche,720900,13.90
+Mexico,Veracruz,8112505,95.90
+Mexico,Colima,581100,106.50
+Mexico,Morelos,1637400,331.40
+Mexico,San Luis Potosi,2370400,37.70
+Mexico,Nayarit,942200,34.10
+Mexico,Michoacan,4066900,67.90
+Norway,Oslo,681071,1418.90
+Norway,Innlandet,371054,7.10
+Norway,Troms og Finnmark,244326,3.30
+Spain,Balearic Islands,1198576,226.00
+Spain,Catalonia,7609499,237.00
+Spain,Canary Islands,2220270,286.00
+Spain,Andalusia,8446561,96.00
+Spain,La Rioja,314487,63.00
+Spain,Madrid,6685471,819.00
+Spain,Basque Country,2181919,304.00
+Spain,Extremadura,1062797,26.00
+Sweden,Skane,1377827,125.70
+Sweden,Stockholm,2377081,364.90
+Taiwan,Taipei,2650154,9765.00
+Thailand,Phuket,416582,767.20
+Thailand,Bangkok,5666264,3620.60
+United Arab Emirates,Dubai,3386941,823.30
+United Arab Emirates,Abu Dhabi,2784490,35.70
+United Arab Emirates,Sharjah,2374132,916.70
+United Kingdom,Scotland,5463300,67.20
+United Kingdom,Northern Ireland,1893667,130.80
+United Kingdom,Wales,3152879,147.40
+United Kingdom,England,56286961,406.60
+United States of America,Maine,1329328,16.00
+United States of America,Louisiana,4670724,41.00
+United States of America,Michigan,9922576,67.00
+United States of America,New Mexico,2085109,6.00
+United States of America,Connecticut,3590886,286.00
+United States of America,Maryland,6006401,238.00
+United States of America,Montana,1032949,2.00
+United States of America,Arizona,6828065,23.00
+United States of America,Indiana,6619680,71.00
+United States of America,Nebraska,1896190,9.00
+United States of America,Florida,20271272,145.00
+United States of America,Hawaii,1431603,86.00
+United States of America,Washington,7170351,41.00
+United States of America,Virginia,1844128,29.00
+United States of America,New York,19795791,162.00
+United States of America,Missouri,6083672,34.00
+United States of America,Colorado,5456574,20.00
+United States of America,Pennsylvania,12802503,110.00
+United States of America,Kansas,2911641,14.00
+United States of America,Massachusetts,6794422,366.00
+United States of America,Vermont,626042,26.00
+United States of America,Minnesota,5489594,26.00
+United States of America,Texas,27469114,40.00
+United States of America,California,39144818,97.00
+United States of America,Oregon,4028977,16.00
+United States of America,Ohio,11614373,109.00
+United States of America,Rhode Island,1056298,394.00
+United States of America,New Jersey,8958013,470.00
+United States of America,Wyoming,586107,2.00
+United States of America,Nevada,2890845,10.00
+United States of America,Mississippi,2992333,24.00
+United States of America,Delaware,945934,187.00
+United States of America,South Dakota,858469,4.00
+United States of America,Idaho,1654930,7.00
+United States of America,Oklahoma,3911338,22.00
+United States of America,West Virginia,8382993,82.00
+United States of America,Wisconsin,5771337,41.00
+United States of America,North Dakota,756927,4.00
+United States of America,Tennessee,6600299,61.00
+United States of America,Georgia,10214860,68.00
+United States of America,Alaska,738432,1.00
+United States of America,Utah,2995919,14.00
+United States of America,Illinois,12859995,89.00
+United States of America,Kentucky,4425092,43.00
+United States of America,New Hampshire,1330608,57.00
+United States of America,Arkansas,2978204,22.00
+United States of America,Alabama,4858979,37.00
+United States of America,South Carolina,4896146,62.00
+United States of America,Iowa,3123899,21.00
+United States of America,North Carolina,10042802,79.00
+United States of America,Nova Scotia,971395,17.40
+Vietnam,Ho Chi Minh,8993000,308.00
+Vietnam,Da Nang,911890,711.00
+Vietnam,Quang Binh,936607,120.00
+Vietnam,Hanoi,8054000,308.00
+Vietnam,Thai Binh,1942325,1300.00
