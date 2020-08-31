@@ -3,7 +3,14 @@ from datetime import datetime
 import numpy as np
 import pandas as pd
 import glob, os
+import statsmodels.api as sm
+from sklearn import linear_model
 
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LassoCV, LassoLarsCV, LassoLarsIC,MultiTaskLassoCV
+
+import scipy
+from sklearn.model_selection import KFold
 
 def data_shift(shift, threshold, mob, mobind, days_considered, causal, type_of_function,mask,mobility,trend,test,growthrate,policy_data):
     '''
@@ -153,3 +160,97 @@ def data_shift(shift, threshold, mob, mobind, days_considered, causal, type_of_f
     del x_train['country']
 
     return (x_train, x_train_copy, y_train)
+
+def linear_regression(shift, threshold,mob, mobind, days_considered, causal,type_of_function,mask,mobility,trend,test,growthrate,policy_data):
+    x_train, x_train_copy, y_train, x_test, x_test_copy, y_test = data_shift(shift, threshold,
+                                                                             mob, mobind, days_considered, causal,
+                                                                             type_of_function,mask,mobility,trend,test,
+                                                                             growthrate,policy_data)
+
+    model = sm.OLS(y_train, x_train)
+    res = model.fit()
+
+    # to get the combined effect of masks+mobility+NPI
+    EFFECTS = combined_effect(res,type_of_function,x_train)
+    return(res,EFFECTS)
+
+# CI function is used for a given array
+def CI(sample):
+    confidence_level = 0.95
+    degrees_freedom = sample.size - 1
+    sample_mean = np.mean(sample)
+    sample_standard_error = np.std(sample)
+
+    confidence_interval = scipy.stats.t.interval(confidence_level, degrees_freedom, sample_mean, sample_standard_error)
+    return(confidence_interval)
+
+def combined_effect(res,type_of_function,x_train):
+
+    # calculating covariance and correlation matrix for the the beta coefficients
+    # using residual to estimate variance (sse)
+
+    ssquare = np.mean((y_train - res.predict(x_train)) ** 2)
+    coefficients = np.array(res.params).reshape(-1, 1)
+
+    if 'Mask_residuals' in list(x_train.columns):
+        residual_index = list(x_train.columns).index('Mask_residuals')
+        coefficients = np.delete(coefficients, residual_index, 0)
+        del x_train['Mask_residuals']
+
+    cov = ssquare * np.linalg.inv(np.matmul(x_train.values.T, x_train.values))
+
+    cholesky = np.linalg.cholesky(cov)
+    cholesky = np.array(cholesky)
+
+    mask_ind = list(x_train.columns).index('Mask')
+    total_ind = [mask_ind]
+    mobility_ind = []        # index for mobility
+    for c, loc in enumerate(list(x_train.columns)):
+        if 'Mobility' in loc:
+            mobility_ind.append(c)
+            total_ind.append(c)
+
+    npi_ind = []             # index for NPI
+    for c, pol in enumerate(list(x_train.columns)):
+        if pol in govtpolicies:
+            npi_ind.append(c)
+            total_ind.append(c)
+
+    # adding perturbations to the cholesky matrix
+    epsilon = 0.001
+    d = len(x_train.columns)
+    cholesky = cholesky + epsilon * np.identity(d)
+
+    # generating 10000 samples
+    n = 10000
+    u = np.random.normal(loc=0, scale=1, size=d * n).reshape(d, n)
+    beta_samples = coefficients + np.matmul(cholesky, u)
+
+    # converting mobility to negative and masks to exponential/sqrt form (interpretation of coefficients for mask: supplementary)
+    beta_samples[mobility_ind, :] = np.negative(beta_samples[mobility_ind, :])
+    if type_of_function == 'log':
+        beta_samples[mask_ind, :] = -(1 - np.power(2, beta_samples[mask_ind, :]))
+    elif type_of_function == 'sqrt':
+        beta_samples[mask_ind, :] = (np.sqrt(2) - 1) * beta_samples[mask_ind, :]
+
+    mask_effect = [0] * 3
+    mobility_effect = [0] * 3
+    npi_effect = [0] * 3
+    total_effect = [0] * 3
+
+    mask_samples = beta_samples[mask_ind, :]
+    mobility_samples = np.sum(beta_samples[mobility_ind], axis=0)
+    npi_samples = np.sum(beta_samples[npi_ind], axis=0)
+    total_samples = np.sum(beta_samples[total_ind], axis=0)
+
+    mask_effect[0], mask_effect[2] = CI(mask_samples)
+    mobility_effect[0], mobility_effect[2] = CI(mobility_samples)
+    npi_effect[0], npi_effect[2] = CI(npi_samples)
+    total_effect[0], total_effect[2] = CI(total_samples)
+
+    mask_effect[1] = np.mean(mask_samples)
+    mobility_effect[1] = np.mean(mobility_samples)
+    npi_effect[1] = np.mean(npi_samples)
+    total_effect[1] = np.mean(total_samples)
+
+    return (total_effect, mask_effect, mobility_effect, npi_effect)
