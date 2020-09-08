@@ -67,6 +67,11 @@ def main():
     5. days_considered: change the days (in the supplement, we present results for days 35, 45 ,..., 85)
     6. type_of_function (transforming the mask numbers as log, linear, or sqrt)
     7. lasso regression model to select the mobility dimensions
+    8. using data with shift or exponential smoothing (Fig S1):
+        a. data_shift functions uses shift (uses shift as a function argument)
+        b. data_exponential_smoothing uses window for smooths data in that window (uses smoothing window as a function argument)
+           smoothing data also keeps a count of the number of the number of NPI interventions in the past w days
+           unlike shift with the actual number of the data considered shift days before. However, it can be changed in the code
     '''
 
     '''
