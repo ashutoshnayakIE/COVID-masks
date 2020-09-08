@@ -12,26 +12,35 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LassoCV, LassoLarsCV, LassoLarsIC,MultiTaskLassoCV
 from sklearn.model_selection import KFold
 
-def finding_th(shift, mob, mobind, days_considered, causal, type_of_function,mask,mobility,trend,test,growthrate,policy_data):
-    vals = [0]*30
+def finding_th():
 
+    vals = [0]*30
+    mob = 'g'
+    mobind = [2,3]
+    days_considered  = 60
+    causal = 0
+    type_of_function = 'log'
     # we run the model for different shifts (shift = 0 days to 14 days)
     # so as to observe that a particular th does not perform by chance
     # even though the best value for th is observed at th=0.28, we select th=0.2 (Supplementary)
-    for s in range(15):
+    for shift in range(15):
         for th in range(30):
-            x_train,x_train_copy,y_train,x_test,x_test_copy,y_test = data_shift(shift, th/100, mob, mobind, days_considered, causal, type_of_function,mask,mobility,trend,test,growthrate,policy_data)
+            x_train,x_train_copy,y_train,x_test,x_test_copy,y_test = data_shift(shift, th/100, mob, mobind, days_considered, causal, type_of_function)
             model = sm.OLS(y_train,x_train)
             res   = model.fit()
             vals[p]  += res.llf
     print(vals.index(max(vals)))
 
 def finding_shift():
-
+    mob = 'g'
+    mobind = [2, 3]
+    days_considered = 60
+    causal = 0
+    type_of_function = 'log'
     # checking the shift values from 0 days to 14 days
     # the best value for shift is obtained at shift = 9 days (minimum MAPE)
     for s in range(15):
-        x_train, x_train_copy, y_train, x_test, x_test_copy, y_test = data_shift(shift, th, mob, mobind, days_considered, causal, type_of_function,mask,mobility,trend,test,growthrate,policy_data)
+        x_train, x_train_copy, y_train, x_test, x_test_copy, y_test = data_shift(shift, th, mob, mobind, days_considered, causal, type_of_function)
 
         # using KFold Cross validation and using the average Mean Absolute Percetage Error (MAPE) to identify the best shift
         kf = KFold(n_splits=10)

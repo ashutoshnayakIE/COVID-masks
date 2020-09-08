@@ -12,7 +12,7 @@ from sklearn.linear_model import LassoCV, LassoLarsCV, LassoLarsIC,MultiTaskLass
 import scipy
 from sklearn.model_selection import KFold
 
-def data_shift(shift, threshold, mob, mobind, days_considered, causal, type_of_function,mask,mobility,trend,test,growthrate,policy_data):
+def data_shift(shift, threshold, mob, mobind, days_considered, causal, type_of_function):
     '''
     mob is used to change the mobility
     'g' is used for google's mobility numbers, 'a' is used for apple's mobility numbers
@@ -29,7 +29,7 @@ def data_shift(shift, threshold, mob, mobind, days_considered, causal, type_of_f
 
     # this function is to be used when we use control function approach
     # the variable is called causal (when we want to use control function, put causal = 1)
-
+    # the following function is only called in the model if the causal = 1, else it is deleted
     y_mask_pred = control_function(type_of_function, days_considered,mask)
 
     data = []  # week from 1st 100 case,dailycases,mobility,mask,fear
@@ -161,11 +161,16 @@ def data_shift(shift, threshold, mob, mobind, days_considered, causal, type_of_f
 
     return (x_train, x_train_copy, y_train)
 
-def linear_regression(shift, threshold,mob, mobind, days_considered, causal,type_of_function,mask,mobility,trend,test,growthrate,policy_data):
-    x_train, x_train_copy, y_train, x_test, x_test_copy, y_test = data_shift(shift, threshold,
-                                                                             mob, mobind, days_considered, causal,
-                                                                             type_of_function,mask,mobility,trend,test,
-                                                                             growthrate,policy_data)
+def linear_regression():
+    mob = 'g'
+    mobind = [2, 3]
+    days_considered = 60
+    causal = 0
+    type_of_function = 'log'
+
+    x_train, x_train_copy, y_train = data_shift(shift, threshold,mob, mobind, days_considered, causal,
+                                                type_of_function,mask,mobility,trend,test,
+                                                growthrate,policy_data)
 
     model = sm.OLS(y_train, x_train)
     res = model.fit()
@@ -174,14 +179,43 @@ def linear_regression(shift, threshold,mob, mobind, days_considered, causal,type
     EFFECTS = combined_effect(res,type_of_function,x_train)
     return(res,EFFECTS)
 
+def lasso_regression():
+    mob = 'g'
+    mobind = [0,1,2,3,4,5]
+    days_considered = 60
+    causal = 0
+    type_of_function = 'log'
+
+    x_train, x_train_copy, y_train = data_shift(shift, threshold,mob, mobind, days_considered, causal,
+                                                type_of_function,mask,mobility,trend,test,
+                                                growthrate,policy_data)
+
+    # using 5-fold cross validation to select the best parameters for lasso
+    model_aic = LassoCV(cv=5)
+    model_aic.fit(x_train, y_train)
+    alpha_aic_ = model_aic.alpha_
+
+    model = Lasso(alpha=alpha_aic_).fit(x_train, y_train)
+    coeff = pd.DataFrame(model.coef_, columns=['Lasso'])
+    EFFECTS = combined_effect(res,type_of_function,x_train)
+
+    return(coeff,EFFECTS)
+
 # CI function is used for a given array
 def CI(sample):
+    # select what bounds is required (95% confidence interval or 25th and 75th percentile)
     confidence_level = 0.95
     degrees_freedom = sample.size - 1
     sample_mean = np.mean(sample)
     sample_standard_error = np.std(sample)
 
     confidence_interval = scipy.stats.t.interval(confidence_level, degrees_freedom, sample_mean, sample_standard_error)
+    a = [0]*3
+    a[0],a[1],a[2] = confidence_interval[0],sample_mean,confidence_interval[1]
+
+    # when computing active cases (forward looking model, confidence interval have to be computed by using percentiles)
+    # a[0],a[1],a[2] = np.percentile(sample,25),np.percentile(sample,50),np.percentile(sample,75)
+
     return(confidence_interval)
 
 def combined_effect(res,type_of_function,x_train):
