@@ -14,7 +14,8 @@ def data_collection(th):
                  'Sweden', 'Taiwan', 'Thailand', 'United Kingdom', 'USA', 'Vietnam']
 
     numb_c = len(countries)
-    mask  = np.load(".../data files//mask.npy")
+    mask  = np.load(".../data files//mask_linear.npy")   # linear interpolation
+    mask  = np.load(".../data files//mask_quadratic.npy")   # quadratic interpolation
     mobility = np.load(".../data files//mobility.npy")
     apple     = (np.load(".../data files//apple.npy") - 100)    # normalizing the numbers of apple from 0 - 1
 

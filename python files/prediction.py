@@ -39,7 +39,7 @@ def Krinsky_Robb_Method(res,x_train):
     # generating 10000 samples
     n = 10000
     u = np.random.normal(loc=0, scale=1, size=d * n).reshape(d, n)
-    
+
     # adding the coefficients (as mean) + generating samples around it by adding standard normal distribution
     beta_samples = coefficients + np.matmul(cholesky, u)
 
